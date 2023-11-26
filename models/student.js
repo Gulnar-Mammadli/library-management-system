@@ -1,37 +1,38 @@
-const { connect } = require("../db");
-const db = connect();
+const sequelize = require("../database");
+const { DataTypes } = require("sequelize");
 
-const Student = db.define(
+const Student = sequelize.define(
   "Student",
   {
     id: {
-      type: db.Sequelize.DataTypes.BIGINT,
+      type: DataTypes.BIGINT,
       autoIncrement: true,
       primaryKey: true,
       allowNull: false,
     },
     registered: {
-      type: db.Sequelize.DataTypes.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
     code: {
-      type: db.Sequelize.DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+    },
+    userId: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      references: {
+        model: "user",
+        key: "id",
+      },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
     },
   },
   {
     tableName: "students",
   }
 );
-
-Student.associate = (models) => {
-  Student.belongsTo(models.User, {
-    foreignKey: "user_id",
-    allowNull: false,
-    onDelete: "CASCADE",
-    onUpdate: "CASCADE",
-  });
-};
 
 module.exports = Student;

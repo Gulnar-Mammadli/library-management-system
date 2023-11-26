@@ -1,30 +1,30 @@
-const { connect } = require("../db");
-const db = connect();
+const sequelize = require("../database");
+const { DataTypes } = require("sequelize");
 
-const User = db.define(
+const User = sequelize.define(
   "User",
   {
     id: {
-      type: db.Sequelize.DataTypes.BIGINT,
+      type: DataTypes.BIGINT,
       autoIncrement: true,
       primaryKey: true,
       allowNull: false,
     },
     firstName: {
-      type: db.Sequelize.DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     lastName: {
-      type: db.Sequelize.DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     username: {
-      type: db.Sequelize.DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
     email: {
-      type: db.Sequelize.DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
@@ -32,25 +32,25 @@ const User = db.define(
       },
     },
     postalAddress: {
-      type: db.Sequelize.DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: true, //?
     },
     password: {
-      type: db.Sequelize.DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
     phoneNumber: {
-      type: db.Sequelize.DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     age: {
-      type: db.Sequelize.DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     gender: {
-      type: db.Sequelize.DataTypes.ENUM(["male", "female"]),
+      type: DataTypes.ENUM(["male", "female"]),
       allowNull: true,
     },
   },
@@ -58,9 +58,5 @@ const User = db.define(
     tableName: "users",
   }
 );
-
-User.associate = (models) => {
-  User.hasOne(models.Student);
-};
 
 module.exports = User;
