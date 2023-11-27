@@ -34,7 +34,6 @@ const User = sequelize.define(
     postalAddress: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true, //?
     },
     password: {
       type: DataTypes.STRING,

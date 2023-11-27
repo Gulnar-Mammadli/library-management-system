@@ -4,7 +4,6 @@ const { createUser } = require("./userController");
 
 const createStudent = async (req, res) => {
   try {
-    console.log(req.body);
     const newUser = await User.create(req.body);
     if (newUser) {
       const { id } = newUser;
@@ -30,7 +29,50 @@ const getAllStudents = async (req, res) => {
   }
 };
 
+const updateStudent = async (req, res) => {
+  try {
+    console.log("her1");
+    const { username } = req.body;
+    const user = await User.findOne({ where: { username: username } });
+    if (user) {
+      console.log("her2");
+      await User.update(req.body, {
+        where: { username: user.username },
+      });
+      const [num] = await Student.update(req.body, {
+        where: { userId: user.id },
+      });
+      console.log(num);
+      if (num === 1) {
+        const updatedStudent = await Student.findOne({
+          where: { userId: user.id },
+        });
+
+        return res.status(201).json({ updatedStudent });
+      } else {
+        return res.status(404).json({ mes: "User not found" });
+      }
+    }
+  } catch (error) {
+    res.status(500).json({ mes: error });
+  }
+};
+
+const deleteStudent = async (req, res) => {
+  try {
+    const user = await User.findByPk(req.query.userId);
+    const student = await Student.findByPk(req.query.id);
+    await user.destroy();
+    await student.destroy();
+    res.status(200).json({ mes: "User is successfully deleted" });
+  } catch (error) {
+    res.status(500).json({ mes: error });
+  }
+};
+
 module.exports = {
   createStudent,
   getAllStudents,
+  updateStudent,
+  deleteStudent,
 };
