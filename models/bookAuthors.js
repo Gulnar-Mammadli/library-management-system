@@ -1,8 +1,8 @@
 const sequelize = require("../database");
 const { DataTypes } = require("sequelize");
 
-const Employee = sequelize.define(
-  "Employee",
+const BookAuthor = sequelize.define(
+  "BookAuthor",
   {
     id: {
       type: DataTypes.BIGINT,
@@ -10,24 +10,26 @@ const Employee = sequelize.define(
       primaryKey: true,
       allowNull: false,
     },
-    role: {
-      type: DataTypes.ENUM(["Admin", "Librarian"]),
+    bookId: {
+      type: DataTypes.BIGINT,
       allowNull: false,
+      references: {
+        model: "book",
+        key: "id",
+      },
     },
-    userId: {
+    authorId: {
         type: DataTypes.BIGINT,
         allowNull: false,
         references: {
-          model: "user",
+          model: "author",
           key: "id",
         },
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
       },
   },
   {
-    tableName: "employees",
+    tableName: "bookAuthors",
   }
 );
 
-module.exports = Employee;
+module.exports = BookAuthor;
