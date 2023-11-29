@@ -19,23 +19,22 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      createdAt: {
-        type: Sequelize.DataTypes.DATE,
-        allowNull: false,
-      },
-      updatedAt: {
-        type: Sequelize.DataTypes.DATE,
-        allowNull: false,
-      },
-      user_id: {
+      userId: {
         type: Sequelize.DataTypes.BIGINT,
         allowNull: false,
         references: {
           model: "users",
           key: "id",
         },
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
+      },
+      allowedNumBooks: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 1,
+      },
+      actualNumBooks: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull: false,
       },
     });
   },

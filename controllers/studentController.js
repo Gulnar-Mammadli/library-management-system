@@ -1,17 +1,30 @@
 const Student = require("../models/Student");
 const User = require("../models/User");
-const { createUser } = require("./userController");
+const Code = require("../models/code");
 
 const createStudent = async (req, res) => {
   try {
     const newUser = await User.create(req.body);
     if (newUser) {
+      console.log("here");
       const { id } = newUser;
+      let registered = false;
+      let allowedBooks = 1;
+      const isUniversityStudent = await Code.findOne({
+        where: { codeName: req.body.code },
+      });
+      console.log(isUniversityStudent);
+      if (isUniversityStudent) {
+        registered = true;
+        allowedBooks = 5;
+      }
       const data = {
-        registered: req.body.registered,
+        registered: registered,
         code: req.body.code,
         userId: id,
+        allowedNumBooks: allowedBooks,
       };
+
       const newStudent = await Student.create(data);
       res.status(201).json({ newStudent });
     }

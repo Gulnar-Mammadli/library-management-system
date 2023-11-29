@@ -1,24 +1,23 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/users/login";
+const API_URL = "http://localhost:8000/users/login";
 
 class LoginService {
   login(username, password, role) {
-    console.log("here");
-
     return axios
-      .get(API_URL, {
+      .post(API_URL, {
         username,
         password,
         role,
       })
       .then((response) => {
-        // localStorage.setItem("user", JSON.stringify(response.data));
-        console.log("data", JSON.stringify(response.data));
-        return JSON.stringify(response.data);
+        localStorage.setItem("user", JSON.stringify(response.data));
+        // console.log("data", JSON.stringify(response.data));
+        return response.data;
       })
       .catch((error) => {
-        console.log("error", error);
+        // console.log("error", JSON.stringify(error.response.data));
+        return error.response.data;
       });
   }
 

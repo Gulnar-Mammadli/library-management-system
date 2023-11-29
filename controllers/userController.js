@@ -1,12 +1,13 @@
 const User = require("../models/User");
 const Student = require("../models/Student");
+const Employee = require("../models/Employee");
 
-const createUser = async (req, res) => {
+const createUser = async (data) => {
   try {
-    const newUser = await User.create(req.body);
-    res.status(201).json({ newUser });
+    const newUser = await User.create(data);
+    return newUser;
   } catch (error) {
-    res.status(500).json({ mes: error });
+    return { error };
   }
 };
 
@@ -14,17 +15,35 @@ const login = async (req, res) => {
   await User.findOne({ where: { username: req.body.username } })
     .then(async (user) => {
       if (req.body.password === user.password) {
-        if (req.body.role === "student") {
+        const userRole = req.body.role;
+        if (userRole === "Student") {
           const student = await Student.findOne({ where: { userId: user.id } });
-          if (student) {
-            const data = {
-              username: user.username,
-              password: user.password,
-              role: req.body.role,
-            };
-            return res.status(200).json({ data });
+          if (!student) {
+            return res.status(404).json({ msg: "Student not found" });
           }
+        } else if (userRole === "Librarian") {
+          const librarian = await Employee.findOne({
+            where: { userId: user.id, role: userRole },
+          });
+          if (!librarian) {
+            return res.status(404).json({ msg: "Librarian not found" });
+          }
+        } else if (userRole === "Admin") {
+          const admin = await Employee.findOne({
+            where: { userId: user.id, role: userRole },
+          });
+          if (!admin) {
+            return res.status(404).json({ msg: "Admin not found" });
+          }
+        } else {
+          return res.status(404).json({ msg: "Role not found" });
         }
+        const data = {
+          username: user.username,
+          password: user.password,
+          role: req.body.role,
+        };
+        return res.status(200).json({ data });
       } else {
         return res.status(400).json({ msg: "Incorrect password" });
       }

@@ -68,10 +68,31 @@ class Login extends Component {
         this.state.password,
         this.state.role
       ).then(
-        () => {
-          if (this.state.role === "student") {
-            this.props.router.navigate("/profile");
-            window.location.reload();
+        (response) => {
+          console.log("HERE", response);
+          let data = "";
+          let msg = "";
+          if (response.data) {
+            data = response.data.data;
+          } else {
+            msg = response.msg;
+          }
+          if (!msg) {
+            if (this.state.role === "Student") {
+              this.props.router.navigate("/profile");
+              // window.location.reload();
+            } else if (this.state.role === "Librarian") {
+              this.props.router.navigate("/profile");
+              // window.location.reload();
+            } else if (this.state.role === "Admin") {
+              this.props.router.navigate("/adminPage");
+              // window.location.reload();
+            }
+          } else {
+            this.setState({
+              loading: false,
+              message: msg,
+            });
           }
         },
         (error) => {

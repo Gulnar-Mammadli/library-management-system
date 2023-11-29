@@ -13,36 +13,6 @@ const Student = sequelize.define(
     registered: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-      getRegistered(){
-        return this.registered;
-      }
-    },
-    allowedNumBooks: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 1,
-      validate: {
-        setNumBooks() {
-          let value = getRegistered();
-          if (instance.registered === true) {
-            instance.allowedNumBooks = 5;
-          } else {
-            instance.allowedNumBooks = 1;
-          }
-        },
-    },
-    
-        },
-    actualNumBooks: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        isInRange(value) {
-          if (value < 0 || value > 5) {
-            throw new Error('actualNumBooks must be between 0 and 5');
-          }
-        },
-    },
     },
     code: {
       type: DataTypes.STRING,
@@ -56,12 +26,21 @@ const Student = sequelize.define(
         model: "user",
         key: "id",
       },
-      onDelete: "CASCADE",
-      onUpdate: "CASCADE",
+    },
+    allowedNumBooks: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+    },
+    actualNumBooks: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 0,
     },
   },
   {
     tableName: "students",
+    timestamps: false,
   }
 );
 

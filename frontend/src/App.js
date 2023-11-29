@@ -7,6 +7,7 @@ import "./App.css";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
+import AdminPage from "./components/AdminPage";
 
 const App = () => {
   return (
@@ -18,6 +19,9 @@ const App = () => {
         <div className="navbar-nav ml-auto">
           <li className="nav-item">
             <Link to={"/profile"} className="nav-link"></Link>
+          </li>
+          <li className="nav-item">
+            <Link to={"/adminPage"} className="nav-link"></Link>
           </li>
         </div>
         {
@@ -42,6 +46,7 @@ const App = () => {
           {/* <Route path="/" element={<Home />} /> */}
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/adminPage" element={<AdminPage />} />
         </Routes>
       </div>
     </div>
