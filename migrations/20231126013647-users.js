@@ -27,14 +27,11 @@ module.exports = {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
         unique: true,
-        isEmail: true,
+        validate: {
+          isEmail: true,
+        },
       },
       postalAddress: {
-        type: Sequelize.DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      phoneNumber: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
       },
@@ -42,6 +39,10 @@ module.exports = {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
         unique: true,
+      },
+      phoneNumber: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull: false,
       },
       age: {
         type: Sequelize.DataTypes.INTEGER,

@@ -14,6 +14,16 @@ const Student = sequelize.define(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    allowedNumBooks: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+    },
+    actualNumBooks: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
     code: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -23,19 +33,9 @@ const Student = sequelize.define(
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: "user",
+        model: "users",
         key: "id",
       },
-    },
-    allowedNumBooks: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 1,
-    },
-    actualNumBooks: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: 0,
     },
   },
   {

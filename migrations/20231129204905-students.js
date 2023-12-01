@@ -14,6 +14,16 @@ module.exports = {
         type: Sequelize.DataTypes.BOOLEAN,
         defaultValue: false,
       },
+      allowedNumBooks: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 1,
+      },
+      actualNumBooks: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
       code: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
@@ -26,15 +36,6 @@ module.exports = {
           model: "users",
           key: "id",
         },
-      },
-      allowedNumBooks: {
-        type: Sequelize.DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 1,
-      },
-      actualNumBooks: {
-        type: Sequelize.DataTypes.STRING,
-        allowNull: false,
       },
     });
   },

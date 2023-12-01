@@ -14,7 +14,7 @@ const BookSubject = sequelize.define(
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: "book",
+        model: "books",
         key: "id",
       },
     },
@@ -22,13 +22,14 @@ const BookSubject = sequelize.define(
         type: DataTypes.BIGINT,
         allowNull: false,
         references: {
-          model: "subject",
+          model: "subjects",
           key: "id",
         },
       },
   },
   {
     tableName: "bookSubjects",
+    timestamps: false,
   }
 );
 

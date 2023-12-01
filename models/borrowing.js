@@ -10,22 +10,6 @@ const Borrowing = sequelize.define(
       primaryKey: true,
       allowNull: false,
     },
-    allowedNumBooks: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 1,
-    },
-    actualNumBooks: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        isInRange(value) {
-          if (value < 0 || value > 5) {
-            throw new Error('actualNumBooks must be between 0 and 5');
-          }
-        },
-    },
-    },
     borrowDate: {
       type: DataTypes.DATEONLY,
       allowNull: false,
@@ -42,14 +26,35 @@ const Borrowing = sequelize.define(
         type: DataTypes.ENUM(["Borrowed", "Returned"]),
         allowNull: false,
     },
-    maxDay: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: 15,
+    finePerDay: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+      defaultValue: 0.2,
+    },
+    totalFine: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+    },
+    copyId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      references: {
+        model: "copies",
+        key: "barcode",
+      },
+    },
+    studentId: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      references: {
+        model: "students",
+        key: "id",
+      },
     },
   },
   {
-    tableName: "bowwowings",
+    tableName: "borrowings",
+    timestamps: false,
   }
 );
 

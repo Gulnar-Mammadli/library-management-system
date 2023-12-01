@@ -18,15 +18,14 @@ const Employee = sequelize.define(
         type: DataTypes.BIGINT,
         allowNull: false,
         references: {
-          model: "user",
+          model: "users",
           key: "id",
         },
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
       },
   },
   {
     tableName: "employees",
+    timestamps: false,
   }
 );
 

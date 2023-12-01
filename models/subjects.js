@@ -18,6 +18,7 @@ const Subject = sequelize.define(
   }, 
   {
     tableName: "subjects",
+    timestamps: false,
   }
 );
 

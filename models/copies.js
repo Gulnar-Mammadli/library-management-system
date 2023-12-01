@@ -6,7 +6,6 @@ const Copy = sequelize.define(
   {
     barcode: {
       type: DataTypes.STRING,
-      autoIncrement: true,
       primaryKey: true,
       allowNull: false,
     },
@@ -22,11 +21,9 @@ const Copy = sequelize.define(
         type: DataTypes.BIGINT,
         allowNull: false,
         references: {
-            model: "book",
+            model: "books",
             key: "id",
           },
-          onDelete: "CASCADE",
-          onUpdate: "CASCADE",
     },
     price: {
         type: DataTypes.DECIMAL(10, 2),
@@ -35,6 +32,7 @@ const Copy = sequelize.define(
   },
   {
     tableName: "copies",
+    timestamps: false,
   }
 );
 

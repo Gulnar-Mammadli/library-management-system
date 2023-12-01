@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await queryInterface.createTable("copies", {
       barcode: {
         type: Sequelize.DataTypes.STRING,
@@ -24,8 +24,6 @@ module.exports = {
               model: "books",
               key: "id",
             },
-            onDelete: "CASCADE",
-            onUpdate: "CASCADE",
       },
       price: {
           type: Sequelize.DataTypes.DECIMAL(10, 2),
@@ -34,7 +32,7 @@ module.exports = {
     });
   },
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('books');
-  }
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable("copies");
+  },
 };

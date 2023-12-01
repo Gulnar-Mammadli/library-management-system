@@ -19,9 +19,18 @@ const Publisher = sequelize.define(
         type: DataTypes.STRING,
         allowNull: true,
       },
+      copyId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        references: {
+          model: "copies",
+          key: "barcode",
+        },
+      },
   }, 
   {
     tableName: "publishers",
+    timestamps: false,
   }
 );
 

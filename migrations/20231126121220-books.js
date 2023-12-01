@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await queryInterface.createTable("books", {
       id: {
         type: Sequelize.DataTypes.BIGINT,
@@ -16,34 +16,34 @@ module.exports = {
         unique: true,
       },
       title: {
-        type: Sequelize.DataTypes.STRING,
+          type: Sequelize.DataTypes.STRING,
           allowNull: false,
           unique: true,
         },
       language: {
-        type: Sequelize.DataTypes.STRING,
+          type: Sequelize.DataTypes.STRING,
           allowNull: true,
       },
-      num_pages: {
-        type: Sequelize.DataTypes.INTEGER,
+      numPages: {
+          type: Sequelize.DataTypes.INTEGER,
           allowNull: true,
       },
-      production_year: {
-        type: Sequelize.DataTypes.INTEGER,
+      productionYear: {
+          type: Sequelize.DataTypes.INTEGER,
           allowNull: true,
       },
-      total_copies: {
-        type: Sequelize.DataTypes.INTEGER,
+      totalCopies: {
+          type: Sequelize.DataTypes.INTEGER,
           allowNull: false,
       },
-      num_available_copies: {
-        type: Sequelize.DataTypes.INTEGER,
+      numAvailableCopies: {
+          type: Sequelize.DataTypes.INTEGER,
           allowNull: false,
       },
     });
   },
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('books');
-  }
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable("books");
+  },
 };
