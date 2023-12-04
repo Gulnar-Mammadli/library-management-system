@@ -1,11 +1,11 @@
 import React, { Component } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
+import { withRouter } from "../common/with-router";
 
 import LoginService from "../services/login";
-
-import { withRouter } from "../common/with-router";
 
 const required = (value) => {
   if (!value) {
@@ -70,6 +70,7 @@ class Login extends Component {
       ).then(
         (response) => {
           console.log("HERE", response);
+
           let data = "";
           let msg = "";
           if (response.data) {
@@ -79,8 +80,9 @@ class Login extends Component {
           }
           if (!msg) {
             if (this.state.role === "Student") {
-              this.props.router.navigate("/profile");
-              // window.location.reload();
+              this.props.router.navigate(
+                `/resetPassword/${encodeURIComponent(this.state.username)}`
+              );
             } else if (this.state.role === "Librarian") {
               this.props.router.navigate("/profile");
               // window.location.reload();

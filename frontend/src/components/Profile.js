@@ -1,14 +1,15 @@
 import React from "react";
-// import AuthService from "../services/auth.service";
+// import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const Profile = () => {
-  //   const currentUser = AuthService.getCurrentUser();
+const Profile = (props) => {
+  const { username } = useParams();
 
   return (
     <div className="container">
       <header className="jumbotron">
         <h3>
-          <strong>Hey</strong> Profile
+          <strong>{`Hey ${username}`}</strong>
         </h3>
       </header>
     </div>

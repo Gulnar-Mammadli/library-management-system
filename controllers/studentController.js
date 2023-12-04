@@ -83,9 +83,19 @@ const deleteStudent = async (req, res) => {
   }
 };
 
+const changePassword = async (req, res) => {
+  let user = User.findOne({ where: { username: req.body.username } });
+  user = { ...user, password: req.body.password };
+  await User.update(user, {
+    where: { username: req.body.username },
+  });
+  res.status(200).json({ msg: "Password successfully updated" });
+};
+
 module.exports = {
   createStudent,
   getAllStudents,
   updateStudent,
   deleteStudent,
+  changePassword,
 };

@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
 import AdminPage from "./components/AdminPage";
+import PasswordResetForm from "./components/ChangePassword";
 
 const App = () => {
   return (
@@ -22,6 +23,9 @@ const App = () => {
           </li>
           <li className="nav-item">
             <Link to={"/adminPage"} className="nav-link"></Link>
+          </li>
+          <li className="nav-item">
+            <Link to={"/resetPassword"} className="nav-link"></Link>
           </li>
         </div>
         {
@@ -45,8 +49,12 @@ const App = () => {
         <Routes>
           {/* <Route path="/" element={<Home />} /> */}
           <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:username" element={<Profile />} />
           <Route path="/adminPage" element={<AdminPage />} />
+          <Route
+            path="/resetPassword/:username"
+            element={<PasswordResetForm />}
+          />
         </Routes>
       </div>
     </div>
