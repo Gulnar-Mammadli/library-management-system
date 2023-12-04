@@ -1,6 +1,6 @@
 const Student = require("../models/Student");
 const User = require("../models/User");
-const Code = require("../models/code");
+const Code = require("../models/codes");
 
 const createStudent = async (req, res) => {
   try {

@@ -1,4 +1,4 @@
-const Borrowing = require("../models/borrowings");
+const Borrowing = require("../models/borrowing");
 
 const createBorrowing = async (req, res) => {
   try {
@@ -17,7 +17,6 @@ const getAllBorrowings = async (req, res) => {
     res.status(500).json({ msg: error });
   }
 };
-
 
 module.exports = {
   createBorrowing,

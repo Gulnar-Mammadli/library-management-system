@@ -1,5 +1,5 @@
-const User = require("../models/User");
-const Code = require("../models/Code");
+const User = require("../models/user");
+const Code = require("../models/codes");
 
 const createCode = async (req, res) => {
   try {
