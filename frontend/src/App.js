@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import Profile from "./components/Profile";
 import AdminPage from "./components/AdminPage";
 import PasswordResetForm from "./components/ChangePassword";
+import ListOfBooksPage from "./components/ListOfBooksPage";
 
 const App = () => {
   return (
@@ -55,6 +56,7 @@ const App = () => {
             path="/resetPassword/:username"
             element={<PasswordResetForm />}
           />
+          <Route path="/books" element={<ListOfBooksPage />} />
         </Routes>
       </div>
     </div>

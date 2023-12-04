@@ -9,9 +9,21 @@ const Profile = (props) => {
     <div className="container">
       <header className="jumbotron">
         <h3>
-          <strong>{`Hey ${username}`}</strong>
+          <strong>{`Welcome ${username}`}</strong>
         </h3>
       </header>
+      <div>
+        <p>
+          <a href={`/resetPassword/${encodeURIComponent(username)}`}>
+            Reset Passord
+          </a>
+        </p>
+      </div>
+      <div>
+        <p>
+          <a href="http://localhost:3000/books"> See List of Books</a>
+        </p>
+      </div>
     </div>
   );
 };

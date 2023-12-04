@@ -80,11 +80,16 @@ class Login extends Component {
           }
           if (!msg) {
             if (this.state.role === "Student") {
+              // this.props.router.navigate(
+              //   `/resetPassword/${encodeURIComponent(this.state.username)}`
+              // );
               this.props.router.navigate(
-                `/resetPassword/${encodeURIComponent(this.state.username)}`
+                `/profile/${encodeURIComponent(this.state.username)}`
               );
             } else if (this.state.role === "Librarian") {
-              this.props.router.navigate("/profile");
+              this.props.router.navigate(
+                `/profile/${encodeURIComponent(this.state.username)}`
+              );
               // window.location.reload();
             } else if (this.state.role === "Admin") {
               this.props.router.navigate("/adminPage");
