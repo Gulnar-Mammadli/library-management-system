@@ -24,6 +24,13 @@ const Profile = (props) => {
           <a href="http://localhost:3000/books"> See List of Books</a>
         </p>
       </div>
+      <div>
+        <p>
+          <a href={`/borrowings/${encodeURIComponent(username)}`}>
+            See List of Borrowings
+          </a>
+        </p>
+      </div>
     </div>
   );
 };

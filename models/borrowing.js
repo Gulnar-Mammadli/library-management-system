@@ -15,25 +15,21 @@ const Borrowing = sequelize.define(
       allowNull: false,
     },
     returnDate: {
-        type: DataTypes.DATEONLY,
-        allowNull: false,
+      type: DataTypes.DATEONLY,
+      allowNull: true,
     },
     dueDate: {
-        type: DataTypes.DATEONLY,
-        allowNull: false,
+      type: DataTypes.DATEONLY,
+      allowNull: false,
     },
     status: {
-        type: DataTypes.ENUM(["Borrowed", "Returned"]),
-        allowNull: false,
-    },
-    finePerDay: {
-      type: DataTypes.DECIMAL(10, 2),
+      type: DataTypes.ENUM(["Borrowed", "Returned"]),
       allowNull: false,
-      defaultValue: 0.2,
     },
     totalFine: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
+      defaultValue: 0.0,
     },
     copyId: {
       type: DataTypes.STRING,

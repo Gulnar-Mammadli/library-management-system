@@ -1,11 +1,20 @@
 const Copy = require("../models/copies");
+const { v4: uuidv4 } = require("uuid");
 
 const createCopy = async (req, res) => {
   try {
-    const newCopy = await Copy.create(req.body);
-    res.status(200).json({ newCopy });
+    const data = {
+      barcode: uuidv4(),
+      purchaseDate: req.body.purchaseDate,
+      rackNumber: req.body.rackNumber,
+      bookId: req.body.bookId,
+      price: req.body.price,
+    };
+
+    const newCopy = await Copy.create(data);
+    return res.status(200).json({ newCopy });
   } catch (error) {
-    res.status(500).json({ msg: error });
+    return res.status(500).json({ msg: error });
   }
 };
 
@@ -17,7 +26,6 @@ const getAllCopies = async (req, res) => {
     res.status(500).json({ msg: error });
   }
 };
-
 
 module.exports = {
   createCopy,

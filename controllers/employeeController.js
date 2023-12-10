@@ -11,19 +11,19 @@ const createEmployee = async (req, res) => {
         userId: id,
       };
       const newEmployee = await Employee.create(data);
-      res.status(201).json({ newEmployee });
+      return res.status(201).json({ newEmployee });
     }
   } catch (error) {
-    res.status(500).json({ mes: error });
+    return res.status(500).json({ mes: error });
   }
 };
 
 const getEmployee = async (req, res) => {
   try {
     const allEmployee = await Employee.findAll();
-    res.status(200).json({ allEmployee });
+    return res.status(200).json({ allEmployee });
   } catch (error) {
-    res.status(500).json({ mes: error });
+    return res.status(500).json({ mes: error });
   }
 };
 

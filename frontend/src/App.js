@@ -12,6 +12,7 @@ import ListOfBooksPage from "./components/ListOfBooksPage";
 import Card from "./components/Card";
 import AdminView from "./components/AdminView";
 import AddBookPage from "./components/AddBookPage";
+import ListOfStudentBorrowingsPage from "./components/GetStudentBorrowings";
 
 const App = () => {
   return (
@@ -56,6 +57,10 @@ const App = () => {
           <Route path="/cards" element={<Card />} />
           <Route path="/admin/:username" element={<AdminView />} />
           <Route path="/addBook/:username" element={<AddBookPage />} />
+          <Route
+            path="/borrowings/:username"
+            element={<ListOfStudentBorrowingsPage />}
+          />
         </Routes>
       </div>
     </div>

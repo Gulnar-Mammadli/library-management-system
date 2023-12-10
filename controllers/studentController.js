@@ -26,19 +26,19 @@ const createStudent = async (req, res) => {
       };
 
       const newStudent = await Student.create(data);
-      res.status(201).json({ newStudent });
+      return res.status(201).json({ newStudent });
     }
   } catch (error) {
-    res.status(500).json({ mes: error });
+    return res.status(500).json({ mes: error });
   }
 };
 
 const getAllStudents = async (req, res) => {
   try {
     const allStudents = await Student.findAll();
-    res.status(200).json({ allStudents });
+    return res.status(200).json({ allStudents });
   } catch (error) {
-    res.status(500).json({ mes: error });
+    return res.status(500).json({ mes: error });
   }
 };
 
@@ -77,9 +77,9 @@ const deleteStudent = async (req, res) => {
     const student = await Student.findByPk(req.query.id);
     await user.destroy();
     await student.destroy();
-    res.status(200).json({ mes: "User is successfully deleted" });
+    return res.status(200).json({ mes: "User is successfully deleted" });
   } catch (error) {
-    res.status(500).json({ mes: error });
+    return res.status(500).json({ mes: error });
   }
 };
 
@@ -89,7 +89,7 @@ const changePassword = async (req, res) => {
   await User.update(user, {
     where: { username: req.body.username },
   });
-  res.status(200).json({ msg: "Password successfully updated" });
+  return res.status(200).json({ msg: "Password successfully updated" });
 };
 
 module.exports = {
