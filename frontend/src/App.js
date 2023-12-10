@@ -10,6 +10,8 @@ import Profile from "./components/Profile";
 import AdminPage from "./components/AdminPage";
 import PasswordResetForm from "./components/ChangePassword";
 import ListOfBooksPage from "./components/ListOfBooksPage";
+import Card from "./components/Card";
+import AdminView from "./components/AdminView";
 
 const App = () => {
   return (
@@ -48,15 +50,17 @@ const App = () => {
 
       <div className="container mt-3">
         <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile/:username" element={<Profile />} />
-          <Route path="/adminPage" element={<AdminPage />} />
+          <Route path="/adminPage/:username" element={<AdminPage />} />
           <Route
             path="/resetPassword/:username"
             element={<PasswordResetForm />}
           />
           <Route path="/books" element={<ListOfBooksPage />} />
+          <Route path="/cards" element={<Card />} />
+          <Route path="/admin/:username" element={<AdminView />} />
         </Routes>
       </div>
     </div>

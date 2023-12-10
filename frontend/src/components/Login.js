@@ -92,7 +92,9 @@ class Login extends Component {
               );
               // window.location.reload();
             } else if (this.state.role === "Admin") {
-              this.props.router.navigate("/adminPage");
+              this.props.router.navigate(
+                `/admin/${encodeURIComponent(this.state.username)}`
+              );
               // window.location.reload();
             }
           } else {

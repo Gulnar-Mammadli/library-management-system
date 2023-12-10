@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_URL = "http://localhost:8000/students/";
+const CARD_URL = "http://localhost:8000/cards/";
 
 class RegisterService {
   register(
@@ -13,7 +14,8 @@ class RegisterService {
     age,
     gender,
     code,
-    password
+    password,
+    type
   ) {
     return axios
       .post(API_URL, {
@@ -31,6 +33,11 @@ class RegisterService {
       .then((response) => {
         localStorage.setItem("student", JSON.stringify(response.data));
         // console.log("data", JSON.stringify(response.data));
+        if (response) {
+          const student = response.data.newStudent;
+          const studentId = student.id;
+          axios.post(CARD_URL, { type, studentId });
+        }
         return response.data;
       })
       .catch((error) => {

@@ -31,6 +31,7 @@ class AdminPage extends Component {
     this.onChangeAge = this.onChangeAge.bind(this);
     this.onChangeGender = this.onChangeGender.bind(this);
     this.onChangeCode = this.onChangeCode.bind(this);
+    this.onChangeType = this.onChangeType.bind(this);
 
     this.state = {
       firstName: "",
@@ -43,6 +44,7 @@ class AdminPage extends Component {
       age: "",
       gender: "",
       code: "",
+      type: "",
       loading: false,
       message: "",
     };
@@ -108,6 +110,12 @@ class AdminPage extends Component {
     });
   }
 
+  onChangeType(e) {
+    this.setState({
+      type: e.target.value,
+    });
+  }
+
   handleRegister(e) {
     e.preventDefault();
 
@@ -129,7 +137,8 @@ class AdminPage extends Component {
         this.state.age,
         this.state.gender,
         this.state.code,
-        this.state.password
+        this.state.password,
+        this.state.type
       ).then(
         (response) => {
           console.log("HERE", response);
@@ -141,7 +150,7 @@ class AdminPage extends Component {
             msg = response.msg;
           }
           if (!msg) {
-            this.props.router.navigate("/profile");
+            this.props.router.navigate("/");
             // window.location.reload();
           } else {
             this.setState({
@@ -296,6 +305,17 @@ class AdminPage extends Component {
                     name="password"
                     value={this.state.password}
                     onChange={this.onChangePassword}
+                    validations={[required]}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="text">Choose card</label>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    name="type"
+                    value={this.state.type}
+                    onChange={this.onChangeType}
                     validations={[required]}
                   />
                 </div>
