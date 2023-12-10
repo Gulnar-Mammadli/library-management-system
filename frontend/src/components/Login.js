@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -80,22 +79,16 @@ class Login extends Component {
           }
           if (!msg) {
             if (this.state.role === "Student") {
-              // this.props.router.navigate(
-              //   `/resetPassword/${encodeURIComponent(this.state.username)}`
-              // );
               this.props.router.navigate(
                 `/profile/${encodeURIComponent(this.state.username)}`
               );
             } else if (this.state.role === "Librarian") {
-              this.props.router.navigate(
-                `/profile/${encodeURIComponent(this.state.username)}`
-              );
+              this.props.router.navigate("/borrowings/expired");
               // window.location.reload();
             } else if (this.state.role === "Admin") {
               this.props.router.navigate(
                 `/admin/${encodeURIComponent(this.state.username)}`
               );
-              // window.location.reload();
             }
           } else {
             this.setState({

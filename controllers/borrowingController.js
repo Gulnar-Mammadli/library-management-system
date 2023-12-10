@@ -3,6 +3,7 @@ const Copy = require("../models/copies");
 const Book = require("../models/books");
 const Student = require("../models/student");
 const User = require("../models/user");
+const { Op } = require("sequelize");
 
 const calculateDueDate = (borrowDate) => {
   const borrowDateObj = new Date(borrowDate);
@@ -142,8 +143,56 @@ const getAllStudentBorrowings = async (req, res) => {
   }
 };
 
+const getExpiredBorrowings = async (req, res) => {
+  try {
+    const currentDate = new Date();
+
+    const expiredBorrowings = await Borrowing.findAll({
+      where: {
+        status: "Borrowed",
+        dueDate: { [Op.lt]: currentDate.toISOString().split("T")[0] },
+      },
+      attributes: ["copyId", "borrowDate", "dueDate"], // Include necessary attributes
+    });
+
+    const booksData = [];
+
+    for (const borrowing of expiredBorrowings) {
+      const copy = await Copy.findByPk(borrowing.copyId);
+
+      if (copy) {
+        const book = await Book.findByPk(copy.bookId, {
+          attributes: ["ISBN", "title"],
+        });
+
+        if (book) {
+          booksData.push({
+            book: {
+              barcode: copy.barcode,
+              purchaseDate: copy.purchaseDate, // Include purchaseDate from Copy
+              price: copy.price, // Include price from Copy
+              borrowDate: borrowing.borrowDate, // Include borrowDate from Borrowing
+              dueDate: borrowing.dueDate, // Include dueDate from Borrowing
+              ...book.toJSON(),
+            },
+          });
+        }
+      }
+    }
+
+    return res.status(200).json({ booksData });
+  } catch (error) {
+    console.error("Error getting book data for expired borrowings:", error);
+    return res.status(500).json({
+      msg: "Error getting book data for expired borrowings",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createBorrowing,
   getAllBorrowings,
   getAllStudentBorrowings,
+  getExpiredBorrowings,
 };

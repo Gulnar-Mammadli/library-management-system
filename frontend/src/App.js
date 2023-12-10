@@ -13,6 +13,7 @@ import Card from "./components/Card";
 import AdminView from "./components/AdminView";
 import AddBookPage from "./components/AddBookPage";
 import ListOfStudentBorrowingsPage from "./components/GetStudentBorrowings";
+import ListOfExpiredBorrowingsPage from "./components/GetExpiredBorrowings";
 
 const App = () => {
   return (
@@ -60,6 +61,10 @@ const App = () => {
           <Route
             path="/borrowings/:username"
             element={<ListOfStudentBorrowingsPage />}
+          />
+          <Route
+            path="/borrowings/expired"
+            element={<ListOfExpiredBorrowingsPage />}
           />
         </Routes>
       </div>
