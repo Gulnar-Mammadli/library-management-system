@@ -18,7 +18,7 @@ const ListOfStudentBorrowingsPage = () => {
             },
           }
         );
-        setStudentBorrowings(response.data.studentBorrowings);
+        setStudentBorrowings(response.data.borrowedData);
       } catch (error) {
         console.error("Error fetching borrowings:", error);
       }
@@ -46,7 +46,7 @@ const ListOfStudentBorrowingsPage = () => {
           {studentBorrowings.map((borrowing, rowId) => (
             <tr key={rowId}>
               <td>{rowId + 1}</td>
-              <td>{"title"}</td>
+              <td>{borrowing.title}</td>
               <td>{borrowing.borrowDate}</td>
               <td>{borrowing.dueDate}</td>
               <td>{borrowing.returnDate}</td>

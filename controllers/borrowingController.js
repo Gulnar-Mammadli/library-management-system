@@ -114,7 +114,26 @@ const getAllStudentBorrowings = async (req, res) => {
       where: { studentId: student.id, status: "Borrowed" },
     });
 
-    return res.status(200).json({ studentBorrowings });
+    const borrowedData = [];
+
+    for (const borrowing of studentBorrowings) {
+      const copy = await Copy.findByPk(borrowing.copyId);
+
+      if (copy) {
+        const book = await Book.findByPk(copy.bookId, {
+          attributes: ["title"],
+        });
+
+        if (book) {
+          borrowedData.push({
+            ...borrowing.toJSON(),
+            title: book.title,
+          });
+        }
+      }
+    }
+
+    return res.status(200).json({ borrowedData });
   } catch (error) {
     console.error("Error getting student borrowings:", error);
     return res
