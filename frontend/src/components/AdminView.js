@@ -23,6 +23,18 @@ const AdminView = (props) => {
           <a href="http://localhost:3000/cards"> Activate or Deactivate Card</a>
         </p>
       </div>
+      <div>
+        <p>
+          <a
+            href={`http://localhost:3000/addBook/${encodeURIComponent(
+              username
+            )}`}
+          >
+            {" "}
+            Add Book
+          </a>
+        </p>
+      </div>
     </div>
   );
 };

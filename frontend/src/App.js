@@ -12,6 +12,7 @@ import PasswordResetForm from "./components/ChangePassword";
 import ListOfBooksPage from "./components/ListOfBooksPage";
 import Card from "./components/Card";
 import AdminView from "./components/AdminView";
+import AddBookPage from "./components/AddBookPage";
 
 const App = () => {
   return (
@@ -61,6 +62,7 @@ const App = () => {
           <Route path="/books" element={<ListOfBooksPage />} />
           <Route path="/cards" element={<Card />} />
           <Route path="/admin/:username" element={<AdminView />} />
+          <Route path="/addBook/:username" element={<AddBookPage />} />
         </Routes>
       </div>
     </div>
