@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, Link } from "react-router-dom";
-import LoginService from "./services/login";
 import "./App.css";
 
 import Login from "./components/Login";
@@ -39,19 +38,13 @@ const App = () => {
                 Login
               </Link>
             </li>
-
-            <li className="nav-item">
-              <Link to={"/register"} className="nav-link">
-                Sign Up
-              </Link>
-            </li>
           </div>
         }
       </nav>
 
       <div className="container mt-3">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile/:username" element={<Profile />} />
           <Route path="/adminPage/:username" element={<AdminPage />} />

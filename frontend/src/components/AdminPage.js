@@ -150,8 +150,10 @@ class AdminPage extends Component {
             msg = response.msg;
           }
           if (!msg) {
-            this.props.router.navigate("/");
-            // window.location.reload();
+            const { username } = this.props.router.params;
+            this.props.router.navigate(
+              `/admin/${encodeURIComponent(username)}`
+            );
           } else {
             this.setState({
               loading: false,

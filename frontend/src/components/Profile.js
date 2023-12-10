@@ -9,7 +9,7 @@ const Profile = (props) => {
     <div className="container">
       <header className="jumbotron">
         <h3>
-          <strong>{`Welcome ${username}`}</strong>
+          <strong>{`Welcome, ${username}`}</strong>
         </h3>
       </header>
       <div>
