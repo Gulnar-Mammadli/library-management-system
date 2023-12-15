@@ -84,12 +84,19 @@ const deleteStudent = async (req, res) => {
 };
 
 const changePassword = async (req, res) => {
-  let user = User.findOne({ where: { username: req.body.username } });
-  user = { ...user, password: req.body.password };
-  await User.update(user, {
-    where: { username: req.body.username },
-  });
-  return res.status(200).json({ msg: "Password successfully updated" });
+  let user = await User.findOne({ where: { username: req.body.username } });
+  try {
+    const userWithPassword = await User.findAll({
+      where: { password: req.body.password },
+    });
+    user = { ...user, password: req.body.password };
+    await User.update(user, {
+      where: { username: req.body.username },
+    });
+    return res.status(200).json({ msg: "Password successfully updated" });
+  } catch (error) {
+    return res.status(500).json({ msg: "This password already exists" });
+  }
 };
 
 module.exports = {
