@@ -1,17 +1,16 @@
 const Borrowing = require("../models/borrowing");
-const Copy = require("../models/copies");
 const Book = require("../models/books");
-const Student = require("../models/student");
-const User = require("../models/user");
+const Copy = require("../models/copies");
+const Student = require("../models/Student");
+const User = require("../models/User");
 const { Op } = require("sequelize");
+
 
 const calculateDueDate = (borrowDate) => {
   const borrowDateObj = new Date(borrowDate);
-  const dueDateObj = new Date(
-    borrowDateObj.getTime() + 15 * 24 * 60 * 60 * 1000
-  ); // Add 15 days
+  const dueDateObj = new Date(borrowDateObj.getTime() + 15 * 24 * 60 * 60 * 1000); // Add 15 days
 
-  const formattedDueDate = dueDateObj.toISOString().split("T")[0];
+  const formattedDueDate = dueDateObj.toISOString().split('T')[0];
 
   return formattedDueDate;
 };
@@ -60,7 +59,7 @@ const createBorrowing = async (req, res) => {
     // Include borrowDate, dueDate, and status in the borrowing data
     const borrowingData = {
       ...req.body,
-      borrowDate: borrowDate.toISOString().split("T")[0], // Format borrowDate as "yyyy-mm-dd"
+      borrowDate: borrowDate.toISOString().split('T')[0], // Format borrowDate as "yyyy-mm-dd"
       dueDate: dueDate,
       status: "Borrowed",
     };
@@ -76,9 +75,55 @@ const createBorrowing = async (req, res) => {
     student.actualNumBooks += 1;
     await student.save();
 
-    res.status(200).json({ newBorrowing });
+    return res.status(200).json({ newBorrowing });
   } catch (error) {
-    res.status(500).json({ msg: error });
+    return res.status(500).json({ msg: error });
+  }
+};
+
+const updateBorrowing = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const borrowingToUpdate = await Borrowing.findOne({
+      where: { id: id },
+    });
+
+    if (!borrowingToUpdate) {
+      console.log(`Borrowing record with ID ${id} not found`);
+      return res.status(404).json({ msg: 'Borrowing record not found' });
+    }
+
+    const returnDate = new Date();
+    borrowingToUpdate.returnDate = returnDate.toISOString().split('T')[0];
+    borrowingToUpdate.status = "Returned";
+    borrowingToUpdate.totalFine = calculateTotalFine(returnDate, borrowingToUpdate.dueDate);
+
+    // Save the changes
+    await borrowingToUpdate.save();
+
+    // Update numAvailableCopies in the Books table
+    const copy = await Copy.findByPk(borrowingToUpdate.copyId);
+    const book = await Book.findByPk(copy.bookId);
+
+    if (book) {
+      book.numAvailableCopies += 1;
+      await book.save();
+    }
+
+    // Update actualNumBooks in the Student table
+    const student = await Student.findByPk(borrowingToUpdate.studentId);
+    if (student) {
+      student.actualNumBooks -= 1;
+      await student.save();
+    }
+
+    console.log(`Borrowing record with ID ${id} successfully updated. Return Date: ${returnDate}`);
+
+    return res.status(200).json({ msg: 'Borrowing record successfully updated', updatedBorrowing: borrowingToUpdate });
+  } catch (error) {
+    console.error('Error updating borrowing record:', error);
+    return res.status(500).json({ msg: 'Error updating borrowing record', error: error.message });
   }
 };
 
@@ -100,7 +145,7 @@ const getAllStudentBorrowings = async (req, res) => {
     });
 
     if (!user) {
-      return res.status(401).json({ msg: "User not found" });
+      return res.status(401).json({ msg: 'User not found' });
     }
 
     const student = await Student.findOne({
@@ -108,7 +153,7 @@ const getAllStudentBorrowings = async (req, res) => {
     });
 
     if (!student) {
-      return res.status(404).json({ msg: "Student not found" });
+      return res.status(404).json({ msg: 'Student not found' });
     }
 
     const studentBorrowings = await Borrowing.findAll({
@@ -122,7 +167,7 @@ const getAllStudentBorrowings = async (req, res) => {
 
       if (copy) {
         const book = await Book.findByPk(copy.bookId, {
-          attributes: ["title"],
+          attributes: ['title'],
         });
 
         if (book) {
@@ -136,12 +181,11 @@ const getAllStudentBorrowings = async (req, res) => {
 
     return res.status(200).json({ borrowedData });
   } catch (error) {
-    console.error("Error getting student borrowings:", error);
-    return res
-      .status(500)
-      .json({ msg: "Error getting student borrowings", error: error.message });
+    console.error('Error getting student borrowings:', error);
+    return res.status(500).json({ msg: 'Error getting student borrowings', error: error.message });
   }
 };
+
 
 const getExpiredBorrowings = async (req, res) => {
   try {
@@ -150,9 +194,9 @@ const getExpiredBorrowings = async (req, res) => {
     const expiredBorrowings = await Borrowing.findAll({
       where: {
         status: "Borrowed",
-        dueDate: { [Op.lt]: currentDate.toISOString().split("T")[0] },
+        dueDate: { [Op.lt]: currentDate.toISOString().split('T')[0] },
       },
-      attributes: ["copyId", "borrowDate", "dueDate"], // Include necessary attributes
+      attributes: ['copyId', 'borrowDate', 'dueDate'], // Include necessary attributes
     });
 
     const booksData = [];
@@ -162,7 +206,7 @@ const getExpiredBorrowings = async (req, res) => {
 
       if (copy) {
         const book = await Book.findByPk(copy.bookId, {
-          attributes: ["ISBN", "title"],
+          attributes: ['ISBN', 'title'],
         });
 
         if (book) {
@@ -182,16 +226,16 @@ const getExpiredBorrowings = async (req, res) => {
 
     return res.status(200).json({ booksData });
   } catch (error) {
-    console.error("Error getting book data for expired borrowings:", error);
-    return res.status(500).json({
-      msg: "Error getting book data for expired borrowings",
-      error: error.message,
-    });
+    console.error('Error getting book data for expired borrowings:', error);
+    return res.status(500).json({ msg: 'Error getting book data for expired borrowings', error: error.message });
   }
 };
 
+
+
 module.exports = {
   createBorrowing,
+  updateBorrowing,
   getAllBorrowings,
   getAllStudentBorrowings,
   getExpiredBorrowings,

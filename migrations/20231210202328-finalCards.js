@@ -3,23 +3,22 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("bookings", {
-      id: {
-        type: Sequelize.DataTypes.BIGINT,
-        autoIncrement: true,
+    await queryInterface.createTable("cards", {
+      cardNumber: {
+        type: Sequelize.DataTypes.STRING,
         primaryKey: true,
         allowNull: false,
       },
-      bookingType: {
-        type: Sequelize.DataTypes.ENUM(["room", "computer"]),
-        allowNull: false,
-      },
-      startTime: {
-          type: Sequelize.DataTypes.DATE,
+      actv_date: {
+          type: Sequelize.DataTypes.DATEONLY,
           allowNull: false,
       },
-      endTime: {
-          type: Sequelize.DataTypes.DATE,
+      status: {
+          type: Sequelize.DataTypes.ENUM(["Activated", "Deactivated"]),
+          allowNull: false,
+      },
+      type: {
+          type: Sequelize.DataTypes.ENUM(["Book", "Room", "Computer"]),
           allowNull: false,
       },
       studentId: {
@@ -34,6 +33,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("bookings");
+    await queryInterface.dropTable("cards");
   },
 };

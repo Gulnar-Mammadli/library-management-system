@@ -21,9 +21,9 @@ const createCopy = async (req, res) => {
 const getAllCopies = async (req, res) => {
   try {
     const allCopies = await Copy.findAll();
-    res.status(200).json({ allCopies });
+    return res.status(200).json({ allCopies });
   } catch (error) {
-    res.status(500).json({ msg: error });
+    return res.status(500).json({ msg: error });
   }
 };
 

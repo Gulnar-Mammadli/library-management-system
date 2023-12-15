@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("students", {
+  async up (queryInterface, Sequelize) {
+    await queryInterface.createTable('students', { 
       id: {
         type: Sequelize.DataTypes.BIGINT,
         autoIncrement: true,
@@ -36,11 +36,13 @@ module.exports = {
           model: "users",
           key: "id",
         },
-      },
+      },   
+    
     });
   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("students");
-  },
+  async down (queryInterface, Sequelize) {
+     await queryInterface.dropTable('students');
+     
+  }
 };

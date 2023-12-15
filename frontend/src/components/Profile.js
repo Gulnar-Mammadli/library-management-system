@@ -15,7 +15,7 @@ const Profile = (props) => {
       <div>
         <p>
           <a href={`/resetPassword/${encodeURIComponent(username)}`}>
-            Reset Passord
+            Reset Password
           </a>
         </p>
       </div>
@@ -32,6 +32,7 @@ const Profile = (props) => {
         </p>
       </div>
     </div>
+    
   );
 };
 

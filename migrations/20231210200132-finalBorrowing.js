@@ -16,7 +16,7 @@ module.exports = {
       },
       returnDate: {
           type: Sequelize.DataTypes.DATEONLY,
-          allowNull: false,
+          allowNull: true,
       },
       dueDate: {
           type: Sequelize.DataTypes.DATEONLY,
@@ -26,14 +26,10 @@ module.exports = {
           type: Sequelize.DataTypes.ENUM(["Borrowed", "Returned"]),
           allowNull: false,
       },
-      finePerDay: {
-        type: Sequelize.DataTypes.DECIMAL(10, 2),
-        allowNull: false,
-        defaultValue: 0.2,
-      },
       totalFine: {
         type: Sequelize.DataTypes.DECIMAL(10, 2),
         allowNull: false,
+        defaultValue: 0.00,
       },
       copyId: {
         type: Sequelize.DataTypes.STRING,
