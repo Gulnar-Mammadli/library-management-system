@@ -5,13 +5,24 @@ const { v4: uuidv4 } = require("uuid");
 
 const createCard = async (req, res) => {
   try {
+    const { type, studentId } = req.body;
+
+    const existingCard = await Card.findOne({
+      where: { studentId, type },
+    });
+
+    if (existingCard) {
+      return res.status(400).json({ msg: "A card of the same type already exists for this student" });
+    }
+
     const data = {
       cardNumber: uuidv4(),
       actv_date: new Date(),
       status: "Activated",
-      type: req.body.type,
-      studentId: req.body.studentId,
+      type,
+      studentId,
     };
+
     const newCard = await Card.create(data);
     return res.status(201).json({ newCard });
   } catch (error) {

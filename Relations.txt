@@ -1,0 +1,14 @@
+Relations:
+Users-Employees (One-to-One): One employee has one username and one user belongs to one employee.
+Users-Students (One-to-One): One student has one username and one user belongs to one student.
+Users-Permissions (Many-to-Many): One user can have many permissions, and one permisission can belong to many users.
+Students-Cards (One-to-Many): One student has 3 cards(Room, Book, Computer), butt one card belongs to only one student.
+Students - ComputerBooking (One-to-Many): One student can have many computer bookings, but one computer booking belongs to only one student.
+Students - RoomBooking (One-to-Many): One student can have many room bookings, but one room booking belongs to only one student.
+Students-Copies (Many-to-Many): One student can borrow many copies and one copy can be purchased by many students.
+Books-Copies (One-to-Many): One book has many copies but one copy belongs to one book
+Books-Authors (One-to-Many): One book has many authors but one book can be written by many authors.
+Books-Subjects (One-to-Many): One book has many subjects and one subject can belongs to many books.
+Copies-Publishers (One-to-Many): One copy can be published by one publisher but one publisher can publish many copies.
+
+

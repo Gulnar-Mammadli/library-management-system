@@ -13,6 +13,7 @@ const BookSubject = sequelize.define(
     bookId: {
       type: DataTypes.BIGINT,
       allowNull: false,
+      
       references: {
         model: "books",
         key: "id",

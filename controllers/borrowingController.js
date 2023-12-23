@@ -103,10 +103,8 @@ const updateBorrowing = async (req, res) => {
       borrowingToUpdate.dueDate
     );
 
-    // Save the changes
     await borrowingToUpdate.save();
 
-    // Update numAvailableCopies in the Books table
     const copy = await Copy.findByPk(borrowingToUpdate.copyId);
     const book = await Book.findByPk(copy.bookId);
 
@@ -115,7 +113,6 @@ const updateBorrowing = async (req, res) => {
       await book.save();
     }
 
-    // Update actualNumBooks in the Student table
     const student = await Student.findByPk(borrowingToUpdate.studentId);
     if (student) {
       student.actualNumBooks -= 1;

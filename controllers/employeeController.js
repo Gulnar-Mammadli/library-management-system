@@ -6,9 +6,11 @@ const createEmployee = async (req, res) => {
     const newUser = await User.create(req.body);
     if (newUser) {
       const { id } = newUser;
+      const hireDate = new Date();
       const data = {
-        role: req.body.role,
+        salary: req.body.salary,
         userId: id,
+        hireDate,
       };
       const newEmployee = await Employee.create(data);
       return res.status(201).json({ newEmployee });

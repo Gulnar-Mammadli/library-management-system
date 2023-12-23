@@ -3,10 +3,10 @@ const Book = require("../models/books");
 const createBook = async (req, res) => {
   try {
     const numAvailableCopies = req.body.totalCopies;
-    const newBook = await Book.create({...req.body, numAvailableCopies});
+    const newBook = await Book.create({ ...req.body, numAvailableCopies });
     return res.status(200).json({ newBook });
   } catch (error) {
-    return res.status(500).json({ msg: error });
+    return res.status(500).json({ msg: error.message });
   }
 };
 
@@ -15,10 +15,9 @@ const getAllBooks = async (req, res) => {
     const allBooks = await Book.findAll();
     return res.status(200).json({ allBooks });
   } catch (error) {
-    return res.status(500).json({ msg: error });
+    return res.status(500).json({ msg: error.message });
   }
 };
-
 
 module.exports = {
   createBook,

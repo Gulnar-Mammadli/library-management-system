@@ -7,5 +7,4 @@ const {
 const router = express.Router();
 
 router.route("/").post(createBook).get(getAllBooks);
-
 module.exports = router;

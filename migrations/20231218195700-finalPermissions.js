@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("permissions", {
+  async up (queryInterface, Sequelize) {
+    await queryInterface.createTable('permissions', { 
       id: {
         type: Sequelize.DataTypes.BIGINT,
         autoIncrement: true,
@@ -11,12 +11,12 @@ module.exports = {
         allowNull: false,
       },
       method: {
-        type: Sequelize.DataTypes.STRING,
-        allowNull: false,
+          type: Sequelize.DataTypes.STRING,
+          allowNull: false,
       },
       route: {
-        type: Sequelize.DataTypes.STRING,
-        allowNull: false,
+          type: Sequelize.DataTypes.STRING,
+          allowNull: false,
       },
       hasPermission: {
         type: Sequelize.DataTypes.BOOLEAN,
@@ -25,7 +25,7 @@ module.exports = {
     });
   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("permissions");
-  },
+  async down (queryInterface, Sequelize) {
+    await queryInterface.dropTable('permissions');
+  }
 };

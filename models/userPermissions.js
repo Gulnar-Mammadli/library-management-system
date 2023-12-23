@@ -13,20 +13,20 @@ const UserPermission = sequelize.define(
     userId: {
       type: DataTypes.BIGINT,
       allowNull: false,
-
+      
       references: {
         model: "users",
         key: "id",
       },
     },
     permissionId: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-      references: {
-        model: "permissions",
-        key: "id",
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+          model: "permissions",
+          key: "id",
+        },
       },
-    },
   },
   {
     tableName: "userPermissions",

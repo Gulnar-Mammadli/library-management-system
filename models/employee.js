@@ -10,9 +10,17 @@ const Employee = sequelize.define(
       primaryKey: true,
       allowNull: false,
     },
-    role: {
-      type: DataTypes.ENUM(["Admin", "Librarian"]),
+    hireDate: {
+      type: DataTypes.DATEONLY,
       allowNull: false,
+    },
+    leaveDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: true,
+    },
+    salary: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: true,
     },
     userId: {
         type: DataTypes.BIGINT,

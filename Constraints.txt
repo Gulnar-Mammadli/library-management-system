@@ -1,0 +1,120 @@
+Note: X means that the column does not have any constraint
+
+Constrains:
+
+"Users" table:
+id - primary key, not null
+username - not null, unique
+firstName - not null
+lastName - not null
+password - not null, unique
+age - X
+gender - check (gender in ("male", "female"))
+email - not null, unique
+postalAddress - not null
+phoneNumber - not null
+role - default: "Student", check (gender in ("Students", "Librarian", "Admin"))
+
+"Employees" table:
+id - primary key, not null
+hireDate - not null
+leaveDtae - X
+salary - X
+userId - foreign key reference to (Users.id), not null
+
+"Students" table:
+id - primary key, not null
+registered - default: false
+allowedNumBooks - not null, default: 1
+actualNumbooks - not null, default: 0
+code - not null, unique
+userId - foreign key reference to (Users.id), not null
+
+"Books" table:
+id - primary key, not null
+ISBN - not null, unique
+title - not null, unique
+language - X
+numPages - X
+productionYear - X
+totalCopies - not null
+numAvailableCopies - not null
+
+"Copies" table:
+barcode - primary key, not null
+purchaseDate - X
+rackNumber - not null
+bookId - foreign key reference to (Books.id), not null
+price - X
+
+"Borrowings" table:
+id - primary key, not null
+borrowDate - not null
+returnDate - X
+dueDate - not null
+status - not null, (status in ("Borrowed", "Returned"))
+totalFine - not null, delault: 0.00
+copyId - foreign key reference to (Copies.barcode), not null
+studentId - foreign key reference to (Students.id), not null
+
+"Cards" table:
+cardNumber - primary key, not null
+actv_date - not null
+status - not null, (status in ("Activated", "Deactivated"))
+type - not null, (type in ("Book", "Room", "Computer"))
+studentId - foreign key reference to (Students.id), not null
+
+"Codes" table:
+id - primary key, not null
+codeName - not null, unique
+
+"Authors" table:
+id - primary key, not null
+fullName - not null, unique
+
+"BookAuthors" table:
+id - primary key, not null
+bookId - foreign key reference to (Books.id), not null
+authorId - foreign key reference to (Authors.id), not null
+
+"BookSubjects" table:
+id - primary key, not null
+bookId - foreign key reference to (Books.id), not null
+subjectId - foreign key reference to (Subjects.id), not null
+
+"ComputerBookings" table:
+id - primary key, not null
+licenseNumber - not null, unique
+os - not null
+number - not null
+startTime - not null
+endTime - not null
+studentId - foreign key reference to (Students.id), not null
+
+"RoomBookings" table:
+id - primary key, not null
+number - not null
+startTime - not null
+endTime - not null
+studentId - foreign key reference to (Students.id), not null
+ 
+"Publishers" table:
+id - primary key, not null
+name - not null, unique
+address - X
+copyId - foreign key reference to (Copies.barcode), not null
+
+"Subjects" table:
+id - primary key, not null
+name - not null, unique
+
+"Permissions" table:
+id - primary key, not null
+method - not null
+route - not null
+hasPermission - default: false
+
+"UserPermissions" table:
+id - primary key, not null
+userId - foreign key reference to (Users.id), not null
+permissionId - foreign key reference to (Permissions.id), not null

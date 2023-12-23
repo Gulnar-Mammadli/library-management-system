@@ -11,12 +11,12 @@ const Permission = sequelize.define(
       allowNull: false,
     },
     method: {
-      type: DataTypes.STRING,
-      allowNull: false,
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     route: {
-      type: DataTypes.STRING,
-      allowNull: false,
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     hasPermission: {
       type: DataTypes.BOOLEAN,
