@@ -83,3 +83,5 @@ router.use(checkPermission);
 Example is done in borrowing route and commented out.
 
 Then create and give corresponding permissions to the user. Otherwise, you will get "Insufficient permissions" .
+
+We used Looping  tool for CDM and draw.io for Logical design.
