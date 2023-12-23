@@ -32,11 +32,11 @@ Views:
 
 Login page:
 
-![alt text](photos\Login.png)
+![alt text](https://github.com/Gulnar-Mammadli/library-management-system/tree/master/photos\Login.png)
 
 Student view:
 
-![alt text](photos\StudentView.png)
+![alt text](https://github.com/Gulnar-Mammadli/library-management-system/tree/master/photos\StudentView.png)
 
 Student view - List of Books:
 
