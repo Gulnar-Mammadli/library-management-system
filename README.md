@@ -4,9 +4,10 @@
 npm i
 ```
 
-2. Run back-end:
+2. Migrate models and Run back-end:
 
 ```
+npm run migrate
 npm start
 ```
 
