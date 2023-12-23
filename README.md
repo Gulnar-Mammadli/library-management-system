@@ -32,7 +32,7 @@ Views:
 
 Login page:
 
-![alt text](https://github.com/Gulnar-Mammadli/library-management-system/tree/master/photos\Login.png)
+![alt text](photos/Login.png)
 
 Student view:
 
