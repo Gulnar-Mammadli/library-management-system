@@ -23,14 +23,14 @@ const login = async (req, res) => {
           }
         } else if (userRole === "Librarian") {
           const librarian = await Employee.findOne({
-            where: { userId: user.id, role: userRole },
+            where: { userId: user.id },
           });
           if (!librarian) {
             return res.status(404).json({ msg: "Librarian not found" });
           }
         } else if (userRole === "Admin") {
           const admin = await Employee.findOne({
-            where: { userId: user.id, role: userRole },
+            where: { userId: user.id },
           });
           if (!admin) {
             return res.status(404).json({ msg: "Admin not found" });
