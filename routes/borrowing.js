@@ -7,11 +7,15 @@ const {
   getExpiredBorrowings,
 } = require("../controllers/borrowingController");
 
+const { checkPermission } = require("../midleware/auth");
+
 const router = express.Router();
+
+// router.use(checkPermission);
 
 // Resource-related routes
 router.route("/").post(createBorrowing).get(getAllBorrowings);
-router.route("/:id").put(updateBorrowing);
+router.route("/").put(updateBorrowing);
 router.route("/borrowed").get(getAllStudentBorrowings);
 router.route("/expired").get(getExpiredBorrowings);
 
