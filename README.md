@@ -36,39 +36,39 @@ Login page:
 
 Student view:
 
-![alt text](https://github.com/Gulnar-Mammadli/library-management-system/tree/master/photos\StudentView.png)
+![alt text](photos/StudentView.png)
 
 Student view - List of Books:
 
-![alt text](photos\ListOfBooks.png)
+![alt text](photos/ListOfBooks.png)
 
 Student view - List of Loans:
 
-![alt text](photos\ListOfLoans.png)
+![alt text](photos/ListOfLoans.png)
 
 Student view - Reset Password:
 
-![alt text](photos\ResetPassword.png)
+![alt text](photos/ResetPassword.png)
 
 Admin view:
 
-![alt text](photos\AdminPage.png)
+![alt text](photos/AdminPage.png)
 
 Admin view - Register new Student:
 
-![alt text](photos\RegisterStudent.png)
+![alt text](photos/RegisterStudent.png)
 
 Admin view - Activate/Deactivate student's card
 
-![alt text](photos\ActivateCard.png)
+![alt text](photos/ActivateCard.png)
 
 Admin view - Add new book
 
-![alt text](photos\AddBook.png)
+![alt text](photos/AddBook.png)
 
 Librarian view: List of expired(passed due date) books
 
-![alt text](photos\ExpiredLoans.png)
+![alt text](photos/ExpiredLoans.png)
 
 Note:
 User permission logic has been implemented and checked via middleware.
